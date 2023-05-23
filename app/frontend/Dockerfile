@@ -1,5 +1,5 @@
 # Use a Node.js base image from DockerHub
-FROM node:14
+FROM node:14 as build
 
 # Set the working directory in the Docker container
 WORKDIR /app
@@ -16,8 +16,20 @@ COPY . .
 # Build your frontend
 RUN npm run build
 
+# Start a new stage from the Node.js base image
+FROM node:14 as production
+
+# Set the working directory
+WORKDIR /app
+
+# Install serve
+RUN npm install -g serve
+
+# Copy from the 'build' stage the built app to the 'production' stage
+COPY --from=build /app/dist .
+
 # Expose the port that your app runs on
-EXPOSE 3000
+EXPOSE 5000
 
 # The command to run your application
-CMD ["npm", "start"]
+CMD ["serve", "-s", ".", "-l", "5000"]

@@ -133,13 +133,9 @@ const OneShot = () => {
         <div className={styles.oneshotContainer}>
             <div className={styles.oneshotTopSection}>
                 <SettingsButton className={styles.settingsButton} onClick={() => setIsConfigPanelOpen(!isConfigPanelOpen)} />
-                <h1 className={styles.oneshotTitle}>Ask your data</h1>
+                <h1 className={styles.oneshotTitle}>Fragen stellen</h1>
                 <div className={styles.oneshotQuestionInput}>
-                    <QuestionInput
-                        placeholder="Example: Does my plan cover annual eye exams?"
-                        disabled={isLoading}
-                        onSend={question => makeApiRequest(question)}
-                    />
+                    <QuestionInput placeholder="Stelle eine Frage..." disabled={isLoading} onSend={question => makeApiRequest(question)} />
                 </div>
             </div>
             <div className={styles.oneshotBottomSection}>
@@ -173,12 +169,12 @@ const OneShot = () => {
             </div>
 
             <Panel
-                headerText="Configure answer generation"
+                headerText="Konfiguration"
                 isOpen={isConfigPanelOpen}
                 isBlocking={false}
                 onDismiss={() => setIsConfigPanelOpen(false)}
                 closeButtonAriaLabel="Close"
-                onRenderFooterContent={() => <DefaultButton onClick={() => setIsConfigPanelOpen(false)}>Close</DefaultButton>}
+                onRenderFooterContent={() => <DefaultButton onClick={() => setIsConfigPanelOpen(false)}>Schließen</DefaultButton>}
                 isFooterAtBottom={true}
             >
                 <ChoiceGroup
@@ -193,7 +189,7 @@ const OneShot = () => {
                     <TextField
                         className={styles.oneshotSettingsSeparator}
                         defaultValue={promptTemplate}
-                        label="Override prompt template"
+                        label="Prompt template überschreiben"
                         multiline
                         autoAdjustHeight
                         onChange={onPromptTemplateChange}
@@ -205,7 +201,7 @@ const OneShot = () => {
                         <TextField
                             className={styles.oneshotSettingsSeparator}
                             defaultValue={promptTemplatePrefix}
-                            label="Override prompt prefix template"
+                            label="Prompt prefix template überschreiben"
                             multiline
                             autoAdjustHeight
                             onChange={onPromptTemplatePrefixChange}
@@ -213,7 +209,7 @@ const OneShot = () => {
                         <TextField
                             className={styles.oneshotSettingsSeparator}
                             defaultValue={promptTemplateSuffix}
-                            label="Override prompt suffix template"
+                            label="Prompt suffix template überschreiben"
                             multiline
                             autoAdjustHeight
                             onChange={onPromptTemplateSuffixChange}
@@ -223,23 +219,23 @@ const OneShot = () => {
 
                 <SpinButton
                     className={styles.oneshotSettingsSeparator}
-                    label="Retrieve this many documents from search:"
+                    label="Anzahl der Dokumente einbeziehen:"
                     min={1}
                     max={50}
                     defaultValue={retrieveCount.toString()}
                     onChange={onRetrieveCountChange}
                 />
-                <TextField className={styles.oneshotSettingsSeparator} label="Exclude category" onChange={onExcludeCategoryChanged} />
+                <TextField className={styles.oneshotSettingsSeparator} label="Kategorie auschließen" onChange={onExcludeCategoryChanged} />
                 <Checkbox
                     className={styles.oneshotSettingsSeparator}
                     checked={useSemanticRanker}
-                    label="Use semantic ranker for retrieval"
+                    label="Verwende semantischen Ranker"
                     onChange={onUseSemanticRankerChange}
                 />
                 <Checkbox
                     className={styles.oneshotSettingsSeparator}
                     checked={useSemanticCaptions}
-                    label="Use query-contextual summaries instead of whole documents"
+                    label="Verwende semantische Zusammenfassungen statt gesamte Dokumente"
                     onChange={onUseSemanticCaptionsChange}
                     disabled={!useSemanticRanker}
                 />

@@ -5,18 +5,20 @@ services:
       context: ./app/backend
       dockerfile: Dockerfile
     volumes:
-      - ./backend:/app
+      - ./app/backend:/app
     ports:
       - 8000:8000
     environment:
+      - SOME_ENV_VARIABLE=some_value
       # - SOME_ENV_VARIABLE=some_value
   frontend:
     build:
       context: ./app/frontend
       dockerfile: Dockerfile
     volumes:
-      - ./frontend:/app
+      - ./app/frontend:/app
     ports:
-      - 3000:3000
+      - 5000:5000
     environment:
+      - ANOTHER_ENV_VARIABLE=another_value
       # - ANOTHER_ENV_VARIABLE=another_value

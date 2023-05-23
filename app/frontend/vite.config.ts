@@ -5,14 +5,14 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
     plugins: [react()],
     build: {
-        outDir: "../backend/static",
+        outDir: "dist",
         emptyOutDir: true,
         sourcemap: true
     },
     server: {
         proxy: {
-            "/ask": "http://localhost:5000",
-            "/chat": "http://localhost:5000"
+            "/ask": "http://backend:8000",
+            "/chat": "http://backend:8000"
         }
     }
 });
